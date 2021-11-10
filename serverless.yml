@@ -5,7 +5,7 @@ custom:
   DB_NAME: knowledgeBotDBtest
   USERNAME: master
   PASSWORD: password
-  
+
   MYSQL:
     HOST:
       Fn::GetAtt: [MySqlRDSInstance, Endpoint.Address]
@@ -137,7 +137,7 @@ functions:
             name: verify-token
             identitySource: method.request.header.Authorization
             resultTtlInSeconds: 3600
-            
+
   getMLBotResponseBySubmissionID:
     handler: functions/getMLBotResponseBySubmissionId.handler
     events:
@@ -157,7 +157,7 @@ functions:
             name: verify-token
             identitySource: method.request.header.Authorization
             resultTtlInSeconds: 3600
-    
+
   getUniversities:
     handler: functions/getUniversities.handler
     events:
@@ -196,7 +196,67 @@ functions:
             name: verify-token
             identitySource: method.request.header.Authorization
             resultTtlInSeconds: 3600
-  
+
+  getAllLeaderboardEntries:
+    handler: functions/leaderboardEndpoints.getAllEntries
+    events:
+      - http:
+          path: leaderboard/by-game/{gameID}
+          method: get
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+          authorizer:
+            name: verify-token
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+
+  saveLeaderboardEntry:
+    handler: functions/leaderboardEndpoints.postCurrentEntry
+    events:
+      - http:
+          path: leaderboard/
+          method: post
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+          authorizer:
+            name: verify-token
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+
+  getReferralLink:
+    handler: functions/userEndpoints.getReferralLinkOfUser
+    events:
+      - http:
+          path: user/referral-link
+          method: get
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+          authorizer:
+            name: verify-token
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 3600
+
 resources:
   Resources:
     LambdaRole: ${file(./resource/LambdaRole.yml)}
