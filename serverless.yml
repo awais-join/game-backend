@@ -2,7 +2,7 @@ service: ${file(./secrets.json):ApiName}
 
 custom:
   secrets: ${file(secrets.json)}
-  DB_NAME: knowledgeBotDBtest
+  DB_NAME: gamebackend
   USERNAME: master
   PASSWORD: password
 
@@ -212,10 +212,6 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
               - X-Amz-User-Agent
-          authorizer:
-            name: verify-token
-            identitySource: method.request.header.Authorization
-            resultTtlInSeconds: 3600
 
   saveLeaderboardEntry:
     handler: functions/leaderboardEndpoints.postCurrentEntry
@@ -232,10 +228,6 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
               - X-Amz-User-Agent
-          authorizer:
-            name: verify-token
-            identitySource: method.request.header.Authorization
-            resultTtlInSeconds: 3600
 
   getReferralLink:
     handler: functions/userEndpoints.getReferralLinkOfUser
@@ -252,10 +244,6 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
               - X-Amz-User-Agent
-          authorizer:
-            name: verify-token
-            identitySource: method.request.header.Authorization
-            resultTtlInSeconds: 3600
 
 resources:
   Resources:
