@@ -28,6 +28,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
     "sequelize": "^6.3.5",
+    "serverless-cognito-add-custom-attributes": "^0.3.0",
     "serverless-mysql": "^1.5.4",
     "uuid": "^7.0.1"
   }
