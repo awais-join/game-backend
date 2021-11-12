@@ -1,7 +1,7 @@
 const {DataTypes} = require("sequelize");
 
 module.exports = (sequelize) => {
-  return sequelize.define("game", {
+  return sequelize.define("game_entries", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -14,5 +14,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true
     }
+  }, {
+    freezeTableName: true
   });
 };

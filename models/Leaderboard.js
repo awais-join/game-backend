@@ -1,7 +1,7 @@
 const {DataTypes} = require("sequelize");
 
 module.exports = (sequelize) => {
-  return sequelize.define('leaderboard', {
+  return sequelize.define('leaderboard_entries', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -27,7 +27,8 @@ module.exports = (sequelize) => {
     },
     {
       createdAt: 'time',
-      updatedAt: 'updateTimestamp'
+      updatedAt: 'updateTimestamp',
+      freezeTableName: true
     }
   );
 };

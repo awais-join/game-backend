@@ -1,3 +1,5 @@
+org: themgi
+app: game-backend
 service: ${file(./secrets.json):ApiName}
 
 plugins:
@@ -78,6 +80,10 @@ functions:
       - http:
           path: leaderboard/by-game/{gameID}
           method: get
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId:
+              Ref: ApiGatewayAuthorizer
           cors:
             origin: "*"
             headers:
@@ -135,6 +141,50 @@ functions:
       - http:
           path: game/save-game
           method: post
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId:
+              Ref: ApiGatewayAuthorizer
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+
+  getAllGames:
+    handler: functions/gameEndpoints.getAllGames
+    events:
+      - http:
+          path: game/all
+          method: get
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId:
+              Ref: ApiGatewayAuthorizer
+          cors:
+            origin: "*"
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+
+  helloWorldCallback:
+    handler: functions/leaderboardEndpoints.helloWorldCallback
+    events:
+      - http:
+          path: user/hello-world
+          method: get
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId:
+              Ref: ApiGatewayAuthorizer
           cors:
             origin: "*"
             headers:
