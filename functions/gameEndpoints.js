@@ -1,8 +1,7 @@
 const {addGame, getAllGames} = require("../lib/db");
 
 module.exports.saveNewGame = async (event) => {
-  const body = event.body;
-  console.log('this is the body i received updated string: ', body.name);
+  const body = JSON.parse(event.body);
   try {
     const response = await addGame(body.name);
     return {

@@ -135,11 +135,11 @@ functions:
               - X-Amz-User-Agent
             allowCredentials: true
 
-  saveNewGame:
+  saveGameEndPoint:
     handler: functions/gameEndpoints.saveNewGame
     events:
       - http:
-          path: game/save-game
+          path: game/save-new-game
           method: post
           authorizer:
             type: COGNITO_USER_POOLS
