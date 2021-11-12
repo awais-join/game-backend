@@ -17,9 +17,38 @@ custom:
           AttributeDataType: String
           DeveloperOnlyAttribute: False
           Mutable: True
-          Name: "another" # this will end up being custom:another
+          Name: "first_name" # this will end up being custom:another
           Required: False
-
+        -
+          AttributeDataType: String
+          DeveloperOnlyAttribute: False
+          Mutable: True
+          Name: "last_name" # this will end up being custom:another
+          Required: False
+        -
+          AttributeDataType: String
+          DeveloperOnlyAttribute: False
+          Mutable: True
+          Name: "wallet" # this will end up being custom:another
+          Required: False
+        -
+          AttributeDataType: Boolean
+          DeveloperOnlyAttribute: False
+          Mutable: True
+          Name: "isDiscord" # this will end up being custom:another
+          Required: False
+        -
+          AttributeDataType: Number
+          DeveloperOnlyAttribute: False
+          Mutable: True
+          Name: "reffered_user_count" # this will end up being custom:another
+          Required: False
+        -
+          AttributeDataType: String
+          DeveloperOnlyAttribute: False
+          Mutable: True
+          Name: "hash" # this will end up being custom:another
+          Required: False
   MYSQL:
     HOST:
       Fn::GetAtt: [MySqlRDSInstance, Endpoint.Address]
@@ -41,176 +70,6 @@ provider:
     DB_NAME: ${self:custom.DB_NAME}
     USERNAME: ${self:custom.USERNAME}
     PASSWORD: ${self:custom.PASSWORD}
-
-#functions:
-#  verify-token:
-#    handler: functions/authorize.handler
-#  register:
-#    handler: functions/register.handler
-#    events:
-#      - http:
-#          path: register
-#          method: post
-#          cors:
-#            origin: "*"
-#            headers:
-#              - Content-Type
-#              - X-Amz-Date
-#              - Authorization
-#              - X-Api-Key
-#              - X-Amz-Security-Token
-#              - X-Amz-User-Agent
-#  login:
-#    handler: functions/login.handler
-#    events:
-#      - http:
-#          path: login
-#          method: post
-#          cors:
-#            origin: "*"
-#            headers:
-#              - Content-Type
-#              - X-Amz-Date
-#              - Authorization
-#              - X-Api-Key
-#              - X-Amz-Security-Token
-#              - X-Amz-User-Agent
-#  updateUser:
-#    handler: functions/updateUser.handler
-#    events:
-#      - http:
-#          path: updateUser
-#          method: post
-#          cors:
-#            origin: "*"
-#            headers:
-#              - Content-Type
-#              - X-Amz-Date
-#              - Authorization
-#              - X-Api-Key
-#              - X-Amz-Security-Token
-#              - X-Amz-User-Agent
-#          authorizer:
-#            name: verify-token
-#            identitySource: method.request.header.Authorization
-#            resultTtlInSeconds: 3600
-#  createSubmission:
-#    handler: functions/createSubmission.handler
-#    timeout: 60
-#    events:
-#      - http:
-#          path: submission/create
-#          method: post
-#          cors:
-#            origin: "*"
-#            headers:
-#              - Content-Type
-#              - X-Amz-Date
-#              - Authorization
-#              - X-Api-Key
-#              - X-Amz-Security-Token
-#              - X-Amz-User-Agent
-#          authorizer:
-#            name: verify-token
-#            identitySource: method.request.header.Authorization
-#            resultTtlInSeconds: 3600
-#  createGroup:
-#    handler: functions/createGroup.handler
-#    events:
-#      - http:
-#          path: group/create
-#          method: post
-#          cors:
-#            origin: "*"
-#            headers:
-#              - Content-Type
-#              - X-Amz-Date
-#              - Authorization
-#              - X-Api-Key
-#              - X-Amz-Security-Token
-#              - X-Amz-User-Agent
-#          authorizer:
-#            name: verify-token
-#            identitySource: method.request.header.Authorization
-#            resultTtlInSeconds: 3600
-#  createEvent:
-#    handler: functions/createEvent.handler
-#    events:
-#      - http:
-#          path: event/create
-#          method: post
-#          cors:
-#            origin: "*"
-#            headers:
-#              - Content-Type
-#              - X-Amz-Date
-#              - Authorization
-#              - X-Api-Key
-#              - X-Amz-Security-Token
-#              - X-Amz-User-Agent
-#          authorizer:
-#            name: verify-token
-#            identitySource: method.request.header.Authorization
-#            resultTtlInSeconds: 3600
-#
-#  getMLBotResponseBySubmissionID:
-#    handler: functions/getMLBotResponseBySubmissionId.handler
-#    events:
-#      - http:
-#          path: submission/results/{submissionId}
-#          method: get
-#          cors:
-#            origin: "*"
-#            headers:
-#              - Content-Type
-#              - X-Amz-Date
-#              - Authorization
-#              - X-Api-Key
-#              - X-Amz-Security-Token
-#              - X-Amz-User-Agent
-#          authorizer:
-#            name: verify-token
-#            identitySource: method.request.header.Authorization
-#            resultTtlInSeconds: 3600
-#
-#  getUniversities:
-#    handler: functions/getUniversities.handler
-#    events:
-#      - http:
-#          path: universities
-#          method: get
-#          cors:
-#            origin: "*"
-#            headers:
-#              - Content-Type
-#              - X-Amz-Date
-#              - Authorization
-#              - X-Api-Key
-#              - X-Amz-Security-Token
-#              - X-Amz-User-Agent
-#          authorizer:
-#            name: verify-token
-#            identitySource: method.request.header.Authorization
-#            resultTtlInSeconds: 3600
-#  getAllSubmissionsByProvider:
-#    handler: functions/getSubmissionsByProvider.handler
-#    events:
-#      - http:
-#          path: submissions/allbyprovider
-#          method: get
-#          cors:
-#            origin: "*"
-#            headers:
-#              - Content-Type
-#              - X-Amz-Date
-#              - Authorization
-#              - X-Api-Key
-#              - X-Amz-Security-Token
-#              - X-Amz-User-Agent
-#          authorizer:
-#            name: verify-token
-#            identitySource: method.request.header.Authorization
-#            resultTtlInSeconds: 3600
 
 functions:
   getAllLeaderboardEntries:
@@ -235,6 +94,10 @@ functions:
       - http:
           path: leaderboard/
           method: post
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId:
+              Ref: ApiGatewayAuthorizer
           cors:
             origin: "*"
             headers:
@@ -251,6 +114,10 @@ functions:
       - http:
           path: user/referral-link
           method: get
+          authorizer:
+            type: COGNITO_USER_POOLS
+            authorizerId:
+              Ref: ApiGatewayAuthorizer
           cors:
             origin: "*"
             headers:

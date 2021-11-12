@@ -23,8 +23,8 @@ module.exports.postCurrentEntry = async (event) => {
   const body = JSON.parse(event.body);
   try {
     const response = await saveCurrentEntry({
-      user: body.user,
-      timesPlayed: body.timesPlayed
+      user: event.requestContext.authorizer.claims.sub,
+      timesPlayed: body.timesPlayed,
     });
     return {
       statusCode: 201,
