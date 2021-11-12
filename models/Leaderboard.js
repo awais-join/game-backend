@@ -18,6 +18,11 @@ module.exports = (sequelize) => {
         field: 'times_played',
         allowNull: false,
         defaultValue: 1
+      },
+      userSubId: {
+        type: DataTypes.STRING,
+        field: 'user_sub_id',
+        allowNull: false,
       }
     },
     {

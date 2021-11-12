@@ -129,32 +129,12 @@ functions:
               - X-Amz-User-Agent
             allowCredentials: true
 
-  getHelloWorld:
-    handler: functions/leaderboardEndpoints.helloWorldCallback
+  saveNewGame:
+    handler: functions/gameEndpoints.saveNewGame
     events:
       - http:
-          path: leaderboard/hello-world
-          method: get
-          authorizer:
-            type: COGNITO_USER_POOLS
-            authorizerId:
-              Ref: ApiGatewayAuthorizer
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-
-  getHelloWorldFree:
-    handler: functions/leaderboardEndpoints.helloWorldCallback
-    events:
-      - http:
-          path: leaderboard/free/hello-world
-          method: get
+          path: game/save-game
+          method: post
           cors:
             origin: "*"
             headers:

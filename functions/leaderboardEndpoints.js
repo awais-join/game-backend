@@ -2,7 +2,7 @@ const {allEntriesForEndpoint, saveCurrentEntry} = require("../lib/db");
 
 module.exports.getAllEntries = async (event) => {
   try {
-    const response = await allEntriesForEndpoint(event.pathParameters.gameID);
+    const response = await allEntriesForEndpoint(event.pathParameters.gameID) || [];
     return {
       statusCode: 200,
       headers: {
@@ -23,8 +23,9 @@ module.exports.postCurrentEntry = async (event) => {
   const body = JSON.parse(event.body);
   try {
     const response = await saveCurrentEntry({
-      user: event.requestContext.authorizer.claims.sub,
+      userSubId: event.requestContext.authorizer.claims.sub,
       timesPlayed: body.timesPlayed,
+      gameID: body.gameID
     });
     return {
       statusCode: 201,

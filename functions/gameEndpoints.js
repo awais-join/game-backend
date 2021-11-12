@@ -1,5 +1,9 @@
-module.exports.getReferralLinkOfUser = async (event) => {
+const {addGame} = require("../lib/db");
+
+module.exports.saveNewGame = async (event) => {
+  const body = event.body;
   try {
+    const response = await addGame({gameName: body.gameName});
     return {
       statusCode: 201,
       headers: {
@@ -9,9 +13,9 @@ module.exports.getReferralLinkOfUser = async (event) => {
         "Accept": '*/*',
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({userSubId: event.requestContext.authorizer.claims.sub})
+      body: JSON.stringify(response)
     }
   } catch (error) {
-    console.log('Exception occurred in getReferralLinkOfUser in userEndpoints.js: ', error);
+    console.log('Exception occurred in saveNewGame in gameEndpoints.js: ', error);
   }
-}
+};
