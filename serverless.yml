@@ -34,10 +34,10 @@ custom:
           Name: "wallet" # this will end up being custom:another
           Required: False
         -
-          AttributeDataType: Boolean
+          AttributeDataType: String
           DeveloperOnlyAttribute: False
           Mutable: True
-          Name: "isDiscord" # this will end up being custom:another
+          Name: "discord" # this will end up being custom:another
           Required: False
         -
           AttributeDataType: Number
