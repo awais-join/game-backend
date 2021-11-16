@@ -1,5 +1,3 @@
-org: themgi
-app: game-backend
 service: ${file(./secrets.json):ApiName}
 
 plugins:
