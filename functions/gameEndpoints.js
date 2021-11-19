@@ -1,4 +1,4 @@
-const {addGame, getAllGames} = require("../lib/db");
+const {addGame, getAllGames, getUserTriesLeft} = require("../lib/db");
 
 module.exports.saveNewGame = async (event) => {
   const body = JSON.parse(event.body);
@@ -24,7 +24,7 @@ module.exports.getAllGames = async (event) => {
   try {
     const response = await getAllGames();
     return {
-      statusCode: 201,
+      statusCode: 200,
       headers: {
         "Access-Control-Allow-Headers": "*",
         "Access-Control-Allow-Origin": "*",

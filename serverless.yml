@@ -49,6 +49,13 @@ custom:
           Mutable: True
           Name: "hash" # this will end up being custom:another
           Required: False
+        -
+          AttributeDataType: Number
+          DeveloperOnlyAttribute: False
+          Mutable: True
+          Name: "tries_left" # this will end up being custom:another
+          Required: False
+
   MYSQL:
     HOST:
       Fn::GetAtt: [MySqlRDSInstance, Endpoint.Address]
@@ -158,26 +165,6 @@ functions:
     events:
       - http:
           path: game/all
-          method: get
-          authorizer:
-            type: COGNITO_USER_POOLS
-            authorizerId:
-              Ref: ApiGatewayAuthorizer
-          cors:
-            origin: "*"
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-
-  helloWorldCallback:
-    handler: functions/leaderboardEndpoints.helloWorldCallback
-    events:
-      - http:
-          path: user/hello-world
           method: get
           authorizer:
             type: COGNITO_USER_POOLS

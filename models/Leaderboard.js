@@ -13,9 +13,9 @@ module.exports = (sequelize) => {
         field: 'game_id',
         allowNull: false,
       },
-      timesPlayed: {
+      playsLeft: {
         type: DataTypes.INTEGER,
-        field: 'times_played',
+        field: 'plays_left',
         allowNull: false,
         defaultValue: 1
       },
@@ -23,10 +23,15 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         field: 'user_sub_id',
         allowNull: false,
-      }
+      },
+      time: {
+        type: DataTypes.INTEGER,
+        field: 'time',
+        allowNull: true
+      },
     },
     {
-      createdAt: 'time',
+      createdAt: 'createdTimestamp',
       updatedAt: 'updateTimestamp',
       freezeTableName: true
     }
