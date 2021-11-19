@@ -40,6 +40,17 @@ module.exports.postCurrentEntry = async (event) => {
       body: JSON.stringify(response)
     }
   } catch (error) {
-    console.log('Exception occurred in postCurrentEntry in leaderboard.endpoint.js: ', error);
+    console.log("ERROR: " + err)
+    return {
+        statusCode: err.statusCode || 500,
+        headers: {
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "*",
+            "Accept": '*/*',
+            "Content-Type": "application/json"
+        },
+        body: { stack: err.stack, message: err.message }
+    };
   }
 }
