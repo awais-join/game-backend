@@ -18,3 +18,13 @@ Properties:
               - logs:CreateLogGroup
               - logs:PutLogEvents
             Resource: arn:aws:logs:*:*:*
+    - PolicyName: CanAccessCognito
+      PolicyDocument: 
+        Version: '2012-10-17'
+        Statement: 
+          - Effect: Allow
+            Action:
+              - cognito-idp:AdminGetUser
+              - cognito-idp:AdminUpdateUser
+              - cognito-idp:AdminUpdateUserAttributes
+            Resource: arn:aws:cognito-idp:*:*:*
